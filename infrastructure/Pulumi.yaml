@@ -1,0 +1,7 @@
+name: PAWNSER
+runtime: go
+description: A minimal Aiven Go Pulumi program
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aiven-go

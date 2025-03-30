@@ -1,0 +1,129 @@
+/* Home.css */
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Ensure the html and body take full height */
+html, body {
+  height: 100%;
+  margin: 0; /* Remove margin to avoid space around the page */
+}
+
+/* Navbar Styling (fixed at the top) */
+.navbar {
+  position: fixed; /* Keep it at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent */
+  padding: 20px;
+  z-index: 10; /* Make sure it's above the hero section */
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* Hero Section */
+.hero-container {
+  position: absolute; /* Make sure the hero section is positioned absolutely */
+  top: 60px; /* Start below the navbar, adjust this value if your navbar is taller */
+  left: 0;
+  width: 100%; /* Full width */
+  height: calc(100vh - 60px); /* Take full height minus the navbar height */
+  background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+  background-size: cover; /* Ensure the image covers the full container */
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Header on top of the image */
+.header {
+  position: absolute; /* Keep the header on top */
+  top: 20px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%); /* Center the header horizontally */
+  z-index: 10; /* Make sure it's above the image */
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Hero Content (text and button) */
+.hero-content {
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 300;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Call-to-Action Button */
+.cta-button {
+  background-color: #ff5722;
+  color: white;
+  font-size: 18px;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button:hover {
+  background-color: #e64a19;
+  transform: scale(1.1);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 48px;
+  }
+
+  .hero-content p {
+    font-size: 20px;
+  }
+
+  .cta-button {
+    font-size: 16px;
+    padding: 14px 32px;
+  }
+}

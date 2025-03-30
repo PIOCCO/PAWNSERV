@@ -1,0 +1,125 @@
+/* Navbar Container */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;  /* Dark background for the navbar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  /* Logo */
+  .navbar .logo img {
+    width: 150px; /* Adjust the width based on your logo size */
+    height: auto;
+  }
+  
+  /* Search Bar */
+  .search-bar input {
+    width: 60%;  /* The search bar will take the remaining space */
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  /* Right Links (Login, Sign Up, Sidebar Icon) */
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  /* Right Links (Anchor Tags) */
+  .nav-links a {
+    text-decoration: none;
+    color: #fff;  /* Light color for text links */
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #007bff;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Initially hidden off-screen */
+    height: 100vh;
+    width: 250px;
+    background-color: white;
+    padding-top: 20px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .sidebar.open {
+    right: 0; /* Visible when the sidebar is open */
+  }
+  
+  /* Sidebar Links */
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    padding: 15px;
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: block;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar a:hover {
+    color: #1abc9c;
+  }
+  
+  /* Sidebar Toggle Icon (Hamburger Menu) */
+  .sidebar-toggle {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;  /* Add padding for larger clickable area */
+  }
+  
+  /* Hamburger Icon Bars */
+  .sidebar-toggle .bar {
+    width: 30px;  /* Wider bars */
+    height: 5px;  /* Thicker bars */
+    background-color: #fff;  /* White color for visibility */
+    border-radius: 5px;  /* Rounded corners */
+    transition: 0.3s ease;
+  }
+  
+  /* Sidebar Toggle Icon - On Hover */
+  .sidebar-toggle:hover .bar {
+    background-color: #007bff;  /* Change color to blue on hover */
+  }
+  
+  /* Media Query for Small Screens */
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 10px 20px;
+    }
+  
+    .search-bar input {
+      width: 50%;
+    }
+  }
+  
