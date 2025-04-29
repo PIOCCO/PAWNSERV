@@ -13,7 +13,7 @@ import (
 
 func main() {
 	// Initialize MongoDB connection
-	
+
 	err := db.ConnectToMongoDB()
 	if err != nil {
 		log.Fatalf("Failed to connect to MongoDB: %v", err)
@@ -27,8 +27,8 @@ func main() {
 	// Configure CORS
 	handler := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:5173"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
-		AllowedHeaders:   []string{"Content-Type"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
 		AllowCredentials: true,
 	}).Handler(mux)
 

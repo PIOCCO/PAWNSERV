@@ -69,11 +69,14 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
+  
+
 }
 
 /* Hover effect on button */
 button:hover {
   background: #1e5acc;
+  
 }
 
 /* Error message styling */

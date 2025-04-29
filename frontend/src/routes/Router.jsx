@@ -2,34 +2,49 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Services from "../pages/service";
-import Layout from "../layouts/Layout"; // Correct path to Layout
-import Login from "../pages/Login"; // Correct path to Layout
-import Signin from "../pages/Signin"; // Correct path to Layout
+import Layout from "../layouts/Layout";  // Default Layout (with Navbar)
+import ProfileLayout from "../layouts/ProfileLayout"; // New layout for UserProfile
+import Login from "../pages/Login";
+import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import TypePage from "../pages/TypePage";
-import UserProfile from "../pages/UserPage";
+import UserProfile from "../pages/UserPage";  // User Profile Page
 import Signupseller from "../pages/signupseller";
-
+import SettingsPage from "../pages/SettingPage";
+import ChatBox from "../pages/ChatPage";
 
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        {/* Layout wraps all pages */}
+        {/* Default Layout */}
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} /> {/* Home page */}
-          <Route path="about" element={<UserProfile />} /> {/* About page */}
-          <Route path="services" element={<Services />} /> {/* Services page */}
-        
-          <Route path="Login" element={<Login />} /> {/* Services page */}
-          <Route path="Signin" element={<Signin />} /> {/* Services page */}
-          <Route path="/signup" element={<TypePage />} />
-          <Route path="/signup2" element={<Signup/>} />
-          <Route path="/signupseller" element={<Signupseller/>} />
-
-          
+          <Route index element={<Home />} />
+          <Route path="services" element={<ChatBox />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signin" element={<Signin />} />
+          <Route path="signup" element={<TypePage />} />
+          <Route path="signup2" element={<Signup />} />
+          <Route path="signupseller" element={<Signupseller />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/service" element={<About />} />
 
         </Route>
+
+        {/* Profile Layout (for UserProfile only) */}
+        <Route path="about" element={<ProfileLayout />}>
+          <Route index element={<UserProfile />} />
+        </Route>
+
+        <Route path="/settings" element={<ProfileLayout />}>
+          <Route index element={<SettingsPage />} />
+        </Route>
+
+        <Route path="/chatroom" element={<ProfileLayout />}>
+          <Route index element={<ChatBox />} />
+        </Route>
+
+        
       </Routes>
     </Router>
   );

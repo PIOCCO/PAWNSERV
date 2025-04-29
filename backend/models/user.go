@@ -1,12 +1,19 @@
 package models
-import "time"
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+    "time"
+)
 
 
 type User struct {
-    ID       string `json:"id"`
-    Name     string `json:"name"`
-    Email    string `json:"email"`
-    Password string `json:"password"`
+	ID             primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
+	Username       string             `json:"username" bson:"username"`
+	ProfilePicture string             `json:"profilePicture" bson:"profilePicture"`
+	Bio            string             `json:"bio" bson:"bio"`
+	Posts          int                `json:"posts" bson:"posts"`
+	Followers      int                `json:"followers" bson:"followers"`
+	Following      int                `json:"following" bson:"following"`
+	PostsData      []string           `json:"postsData" bson:"postsData"`
 }
 
 

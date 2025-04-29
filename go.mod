@@ -6,6 +6,7 @@ toolchain go1.23.7
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.0
+	github.com/golang-jwt/jwt/v5 v5.2.1
 	go.mongodb.org/mongo-driver v1.17.3
 )
 

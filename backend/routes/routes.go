@@ -13,4 +13,14 @@ func SetupRoutes(mux *http.ServeMux) {
 
 	// Buyer routes
 	mux.HandleFunc("/signup/buyer", handlers.BuyerSignupHandler)
+
+	//Search routes
+	mux.HandleFunc("/search", handlers.SearchHandler)
+
+	//Login routes
+	mux.HandleFunc("/login", handlers.LoginHandler)
+
+	//UserInfo route
+	mux.HandleFunc("/user", handlers.GetUserData)
+
 }

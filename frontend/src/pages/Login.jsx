@@ -1,42 +1,86 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Login.css"; // Import the CSS file
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:9090/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Login successful!");
+        navigate("/about  "); // or another protected route
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (err) {
+      alert("Something went wrong");
+      console.error(err);
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-box">
         <h2>Login</h2>
 
-        {/* Login Form */}
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required />
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
           <div className="input-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
 
           <div className="options">
             <label>
               <input type="checkbox" /> Remember me
             </label>
-            <Link to="/forgot-password" className="forgot-password">Forgot Password?</Link>
+            <Link to="/forgot-password" className="forgot-password">
+              Forgot Password?
+            </Link>
           </div>
 
           <button type="submit" className="login-btn">Login</button>
 
-          {/* Google Login */}
           <button type="button" className="google-btn">
-            <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo" />
+            <img
+              src="https://img.icons8.com/color/48/000000/google-logo.png"
+              alt="Google Logo"
+            />
             Login with Google
           </button>
         </form>
 
-        {/* Sign Up Link */}
         <p className="signup-text">
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>

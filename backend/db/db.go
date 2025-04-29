@@ -12,6 +12,7 @@ import (
 var Client *mongo.Client
 var SellerCollection *mongo.Collection
 var BuyerCollection *mongo.Collection
+var UserCollection *mongo.Collection
 
 // ConnectToMongoDB initializes the MongoDB client and collections
 func ConnectToMongoDB() error {
@@ -31,6 +32,7 @@ func ConnectToMongoDB() error {
 	db := client.Database("github-clone") // Replace with your actual database name
 	SellerCollection = db.Collection("sellers")
 	BuyerCollection = db.Collection("buyers")
+	UserCollection = db.Collection("Users")
 
 	// Check the connection
 	err = client.Ping(context.Background(), nil)
