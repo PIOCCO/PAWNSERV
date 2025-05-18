@@ -22,6 +22,7 @@ const Login = () => {
       const data = await res.json();
 
       if (res.ok) {
+        localStorage.setItem("token", data.token);
         alert("Login successful!");
         navigate("/about  "); // or another protected route
       } else {

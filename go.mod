@@ -10,6 +10,10 @@ require (
 	go.mongodb.org/mongo-driver v1.17.3
 )
 
+require github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
+
+require github.com/joho/godotenv v1.5.1 // direct
+
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.17.0 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/internal v1.10.0 // indirect

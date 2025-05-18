@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github-clone/backend/handlers"
+	"github-clone/backend/middleware"
 )
 
 // SetupRoutes initializes the routes for the application
@@ -21,6 +22,7 @@ func SetupRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/login", handlers.LoginHandler)
 
 	//UserInfo route
-	mux.HandleFunc("/user", handlers.GetUserData)
+	mux.Handle("/user", middleware.AuthMiddleware(http.HandlerFunc(handlers.GetUserData)))
+
 
 }

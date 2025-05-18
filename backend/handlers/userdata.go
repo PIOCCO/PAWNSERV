@@ -5,69 +5,50 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"strings"
 	"time"
 
 	"github-clone/backend/db"
+	"github-clone/backend/middleware"
 	"github-clone/backend/models"
 
-	"github.com/golang-jwt/jwt/v5"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-
+// GetUserData returns user data for the authenticated user
 func GetUserData(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// Extract JWT from Authorization header
-	authHeader := r.Header.Get("Authorization")
-	if authHeader == "" {
-		http.Error(w, "Unauthorized: missing Authorization header", http.StatusUnauthorized)
+	// ✅ Extract email from context (already verified by middleware)
+	email, ok := r.Context().Value(middleware.UserContextKey).(string)
+	if !ok || email == "" {
+		http.Error(w, "Unauthorized: email not found in context", http.StatusUnauthorized)
 		return
 	}
 
-	// Validate the format
-	tokenParts := strings.Split(authHeader, " ")
-	if len(tokenParts) != 2 || tokenParts[0] != "Bearer" {
-		http.Error(w, "Unauthorized: invalid Authorization header format", http.StatusUnauthorized)
-		return
-	}
-	tokenString := tokenParts[1]
+	log.Println("🔍 Looking for seller with email:", email)
 
-	// Parse and validate the token
-	claims := &jwt.RegisteredClaims{}
-	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-		return jwtKey, nil
-	})
-	if err != nil || !token.Valid {
-		http.Error(w, "Unauthorized: invalid or expired token", http.StatusUnauthorized)
-		return
-	}
-
-	sellerEmail := claims.Subject
-	log.Println("🔍 Searching seller with email:", sellerEmail)
-
-	// Query the DB
+	// Query the MongoDB database for the seller
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	var seller models.Seller
-	err = db.SellerCollection.FindOne(ctx, bson.M{"email": sellerEmail}).Decode(&seller)
+	err := db.SellerCollection.FindOne(ctx, bson.M{"email": email}).Decode(&seller)
 	if err != nil {
-		log.Println("❌ Error finding seller:", err)
+		log.Println("❌ Seller not found:", err)
 		http.Error(w, "User not found", http.StatusNotFound)
 		return
 	}
 
-	// Respond with seller data
+	// Return the user data as JSON
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(seller); err != nil {
-		http.Error(w, "Error encoding response", http.StatusInternalServerError)
-		log.Println("❌ Error encoding seller data:", err)
+		log.Println("❌ Failed to encode seller response:", err)
+		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 		return
 	}
-	log.Println("✅ Seller data successfully returned")
+
+	log.Println("✅ Seller data returned successfully")
 }
