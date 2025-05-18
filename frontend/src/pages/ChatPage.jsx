@@ -1,21 +1,73 @@
-import React, { useState } from 'react';
-import './ChatPage.css'; // Import the external stylesheet
+import React, { useState, useEffect, useRef } from 'react';
+import './ChatPage.css';
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  const [sender, setSender] = useState('User1');
+  const [sender, setSender] = useState('');
+  const ws = useRef(null);
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username") || "Unknown";
+    setSender(storedUsername);
+
+    ws.current = new WebSocket('ws://localhost:8081');
+
+    ws.current.onopen = () => {
+      console.log('WebSocket connected');
+    };
+
+    ws.current.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+
+    ws.current.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const msg = JSON.parse(reader.result);
+            setMessages(prev => [...prev, msg]);
+          } catch (err) {
+            console.error("Failed to parse message JSON:", err);
+          }
+        };
+        reader.readAsText(event.data);
+      } else {
+        try {
+          const msg = JSON.parse(event.data);
+          setMessages(prev => [...prev, msg]);
+        } catch (err) {
+          console.error("Failed to parse message JSON:", err);
+        }
+      }
+    };
+
+    ws.current.onclose = () => {
+      console.log('WebSocket disconnected');
+    };
+
+    return () => {
+      if (ws.current) ws.current.close();
+    };
+  }, []);
 
   const handleSend = () => {
     if (input.trim() === '') return;
+
     const newMessage = {
       text: input,
       sender: sender,
       timestamp: new Date().toLocaleTimeString(),
     };
-    setMessages([...messages, newMessage]);
+
+    // Send message as JSON string
+    ws.current.send(JSON.stringify(newMessage));
+
+    // Add message locally immediately so sender sees it right away
+    setMessages(prev => [...prev, newMessage]);
+
     setInput('');
-    setSender(sender === 'User1' ? 'User2' : 'User1');
   };
 
   return (
@@ -24,7 +76,7 @@ const ChatBox = () => {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`message ${msg.sender === 'User1' ? 'left' : 'right'}`}
+            className={`message ${msg.sender === sender ? 'right' : 'left'}`}
           >
             <strong>{msg.sender}:</strong> {msg.text}
             <div className="timestamp">{msg.timestamp}</div>
@@ -35,7 +87,7 @@ const ChatBox = () => {
         <input
           className="chat-input"
           type="text"
-          placeholder={`Message as ${sender}`}
+          placeholder="Message"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}

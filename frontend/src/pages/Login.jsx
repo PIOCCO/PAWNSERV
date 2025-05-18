@@ -23,6 +23,7 @@ const Login = () => {
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.username);
         alert("Login successful!");
         navigate("/about  "); // or another protected route
       } else {
