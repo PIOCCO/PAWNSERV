@@ -22,23 +22,27 @@ const ChatBox = () => {
     };
 
     ws.current.onmessage = (event) => {
+      let data = null;
+
       if (event.data instanceof Blob) {
         const reader = new FileReader();
         reader.onload = () => {
           try {
-            const msg = JSON.parse(reader.result);
-            setMessages(prev => [...prev, msg]);
+            data = JSON.parse(reader.result);
+            setMessages(prev => [...prev, data]);
           } catch (err) {
-            console.error("Failed to parse message JSON:", err);
+            console.warn("Message is not valid JSON, using raw text");
+            setMessages(prev => [...prev, { text: reader.result, sender: "unknown", timestamp: new Date().toLocaleTimeString() }]);
           }
         };
         reader.readAsText(event.data);
       } else {
         try {
-          const msg = JSON.parse(event.data);
-          setMessages(prev => [...prev, msg]);
+          data = JSON.parse(event.data);
+          setMessages(prev => [...prev, data]);
         } catch (err) {
-          console.error("Failed to parse message JSON:", err);
+          console.warn("Message is not valid JSON, using raw text");
+          setMessages(prev => [...prev, { text: event.data, sender: "unknown", timestamp: new Date().toLocaleTimeString() }]);
         }
       }
     };
@@ -61,11 +65,10 @@ const ChatBox = () => {
       timestamp: new Date().toLocaleTimeString(),
     };
 
-    // Send message as JSON string
+    // Send message as JSON string to server
     ws.current.send(JSON.stringify(newMessage));
 
-    // Add message locally immediately so sender sees it right away
-    setMessages(prev => [...prev, newMessage]);
+    // Do NOT add message locally here to avoid duplication
 
     setInput('');
   };

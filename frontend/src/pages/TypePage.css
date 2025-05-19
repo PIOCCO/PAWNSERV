@@ -1,99 +1,116 @@
-/* Reset default margins, padding, and enforce full page */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    width: 100%;
-    height: 100%;
-    font-family: "Poppins", sans-serif;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Header (keeps its natural height) */
-  .header {
-    width: 100%;
-    padding: 20px;
-    background: #222;
-    color: white;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  /* Main content container (fills remaining space after header) */
-  .user-page {
-    display: flex;
-    height: calc(100vh - 60px); /* Takes full screen minus header */
-    width: 100%;
-  }
-  
-  /* Sections take exactly 50% of the screen */
-  .buyer-section,
-  .seller-section {
-    flex: 1; /* Both take equal space */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  /* Modern gradient backgrounds */
-  .buyer-section {
-    background: linear-gradient(135deg, #4A90E2, #50E3C2);
-    color: white;
-  }
-  
-  .seller-section {
-    background: linear-gradient(135deg, #F5A623, #D0021B);
-    color: white;
-  }
-  
-  /* Hover effects */
-  .buyer-section:hover,
-  .seller-section:hover {
-    transform: scale(1.02);
-  }
-  
-  /* Buttons */
-  button {
-    margin-top: 15px;
-    padding: 14px 28px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
+.typepage-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 
+.half-section {
+  position: relative;
+  width: 50vw;
+  height: 100vh;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.half-section:hover {
+  transform: scale(1.05);
+}
+
+/* Overlay to darken images for better text contrast */
+.overlay {
+  position: absolute;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  color: white;
+}
+
+.overlay h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1dbf73;
+  font-weight: 700;
+}
+
+.overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  color: #d0f0e0;
+}
+
+.btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.btn-buyer {
+  background-color: transparent;
+  color: #1dbf73;
+  border: 3px solid #1dbf73;
+}
+
+.btn-buyer:hover {
+  background-color: #1dbf73;
+  color: white;
+  border-color: #17a25c;
+}
+
+.btn-seller {
+  background-color: transparent;
+  color: #1dbf73;
+  border: 3px solid #1dbf73;
+}
+
+.btn-seller:hover {
+  background-color: #1dbf73;
+  color: white;
+  border-color: #17a25c;
+}
+
+/* Background images */
+
+.buyer-section {
+  background-image: url("https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=800&q=80");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.seller-section {
+  background-image: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  .typepage-container {
+    flex-direction: column;
   }
-  
-  /* Buyer button */
-  .buyer-btn {
-    background: white;
-    color: #4A90E2;
+
+  .half-section {
+    width: 100vw;
+    height: 50vh;
   }
-  
-  .buyer-btn:hover {
-    background: #3A7CC4;
-    color: white;
-    transform: scale(1.05);
-  }
-  
-  /* Seller button */
-  .seller-btn {
-    background: white;
-    color: #D0021B;
-  }
-  
-  .seller-btn:hover {
-    background: #A8000F;
-    color: white;
-    transform: scale(1.05);
-  }
-  
+}
