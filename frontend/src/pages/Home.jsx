@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
+
+
+
+
+const tagRoutes = {
+  "Website Design": "/website-design",
+  "WordPress": "/wordpress",
+  "Logo Design": "/logo-design",
+  "AI Services": "/ai-services",
+};
 
 const testimonials = [
   {
@@ -63,6 +74,7 @@ const Home = () => {
   const [heroIndex, setHeroIndex] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterMsg, setNewsletterMsg] = useState("");
+  const navigate = useNavigate();
 
   // Hero image slider effect
   useEffect(() => {
@@ -110,7 +122,7 @@ const Home = () => {
               (tag) => (
                 <button
                   key={tag}
-                  onClick={() => setSearchTerm(tag)}
+                  onClick={() => navigate(tagRoutes[tag])}
                   className="tag-btn"
                 >
                   {tag}

@@ -1,0 +1,139 @@
+/* Container */
+.wordpress-page {
+  background: #f9fff9;
+  color: #1a3d1a;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 60px 40px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+/* Header */
+.wp-header h1 {
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: #2e7d32; /* deep green */
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px #4caf50;
+}
+
+.wp-header p {
+  font-size: 1.5rem;
+  color: #387d3a;
+  margin-bottom: 30px;
+}
+
+.wp-hero-img {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 24px;
+  box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
+  margin: 0 auto 50px;
+  display: block;
+  object-fit: cover;
+}
+
+/* Services Boxes */
+.wp-services {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.wp-box {
+  background: white;
+  color: #1a3d1a;
+  padding: 24px 20px 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(46, 125, 50, 0.15);
+  width: 240px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.wp-box:hover {
+  box-shadow: 0 10px 40px rgba(46, 125, 50, 0.3);
+  transform: translateY(-8px);
+}
+
+.wp-box h3 {
+  margin-top: 16px;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  color: #2e7d32;
+}
+
+.wp-box p {
+  color: #4a774a;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+/* Images inside boxes */
+.wp-img {
+  width: 100%;
+  height: 140px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 3px 12px rgba(46, 125, 50, 0.25);
+}
+
+/* Buttons container */
+.wp-cta {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Primary Button */
+.btn-wp-primary {
+  background: linear-gradient(45deg, #4caf50, #2e7d32);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 16px 56px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.7);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  filter: drop-shadow(0 0 10px #4caf50);
+}
+
+.btn-wp-primary:hover {
+  background: linear-gradient(45deg, #388e3c, #1b4d20);
+  box-shadow: 0 12px 30px rgba(56, 142, 60, 0.9);
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 18px #388e3c);
+}
+
+/* Secondary Button */
+.btn-wp-secondary {
+  background-color: transparent;
+  color: #4caf50;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 16px 48px;
+  border: 3px solid #4caf50;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.5);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  filter: drop-shadow(0 0 8px #4caf50);
+}
+
+.btn-wp-secondary:hover {
+  background-color: #4caf50;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(76, 175, 80, 0.8);
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 15px #4caf50);
+}

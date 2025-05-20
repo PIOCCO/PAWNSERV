@@ -12,6 +12,11 @@ import UserProfile from "../pages/UserPage";  // User Profile Page
 import Signupseller from "../pages/signupseller";
 import SettingsPage from "../pages/SettingPage";
 import ChatBox from "../pages/ChatPage";
+import WebsiteDesign from "../pages/WebsiteDesign";
+import WordPress from "../pages/WordPress";
+import LogoDesign from "../pages/LogoDesign";
+import AIServices from "../pages/AIServices";
+import Myservices from "../pages/Myservices";
 
 const AppRouter = () => {
   return (
@@ -28,6 +33,11 @@ const AppRouter = () => {
           <Route path="signupseller" element={<Signupseller />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/service" element={<About />} />
+          <Route path="/website-design" element={<WebsiteDesign />} />
+          <Route path="/wordpress" element={<WordPress />} />
+          <Route path="/logo-design" element={<LogoDesign />} />
+          <Route path="/ai-services" element={<AIServices />} />
+           <Route path="/myservices" element={<Myservices />} />
 
         </Route>
 
